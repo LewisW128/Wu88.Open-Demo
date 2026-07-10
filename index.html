@@ -125,14 +125,17 @@
     font-size:20px;
     font-weight:700;
   }
-  .side-nav .nav-icon{
-    display:none;
+  /* centered horizontally on the vertical divider line (right:41px) */
+  #nav-spline{
     position:absolute;
-    right:-44.5px;top:50%;
-    transform:translateY(-50%);
-    width:44.5px;height:44px;
+    right:-34px;
+    width:150px;height:150px;
+    border:none;
+    pointer-events:none;
+    transition:top .3s ease;
+    transform:scale(1.2);
+    transform-origin:center;
   }
-  .side-nav button.active .nav-icon{display:block;}
 
   @media (max-width:1100px){
     .side-nav{display:none;}
@@ -172,12 +175,13 @@
   </div>
 
   <nav class="side-nav" id="side-nav">
-    <button class="active" data-key="about">ABOUT<img class="nav-icon" src="assets/nav-icon.svg" alt=""></button>
-    <button data-key="what-we-do">WHAT WE DO<img class="nav-icon" src="assets/nav-icon.svg" alt=""></button>
-    <button data-key="reel">REEL<img class="nav-icon" src="assets/nav-icon.svg" alt=""></button>
-    <button data-key="latest-project">LATEST&nbsp;&nbsp;PROJECT<img class="nav-icon" src="assets/nav-icon.svg" alt=""></button>
-    <button data-key="contact-us">CONTACT US<img class="nav-icon" src="assets/nav-icon.svg" alt=""></button>
+    <button class="active" data-key="about">ABOUT</button>
+    <button data-key="what-we-do">WHAT WE DO</button>
+    <button data-key="reel">REEL</button>
+    <button data-key="latest-project">LATEST&nbsp;&nbsp;PROJECT</button>
+    <button data-key="contact-us">CONTACT US</button>
   </nav>
+  <iframe id="nav-spline" src="https://my.spline.design/wu88webdesign-KF9hzZlIhhLWVI4jymvJbJXH-jZL/" loading="lazy"></iframe>
 </div>
 
 <script>
@@ -191,11 +195,21 @@
 
   const titleEl = document.getElementById("panel-title");
   const buttons = document.querySelectorAll("#side-nav button");
+  const nav = document.getElementById("side-nav");
+  const splineIcon = document.getElementById("nav-spline");
+
+  function positionIcon(btn){
+    const stageBox = document.querySelector(".stage").getBoundingClientRect();
+    const btnBox = btn.getBoundingClientRect();
+    const centerY = btnBox.top - stageBox.top + btnBox.height / 2;
+    splineIcon.style.top = (centerY - splineIcon.offsetHeight / 2) + "px";
+  }
 
   buttons.forEach(btn => {
     btn.addEventListener("click", () => {
       buttons.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
+      positionIcon(btn);
 
       titleEl.classList.add("fade");
       setTimeout(() => {
@@ -204,6 +218,9 @@
       }, 200);
     });
   });
+
+  positionIcon(document.querySelector("#side-nav button.active"));
+  window.addEventListener("resize", () => positionIcon(document.querySelector("#side-nav button.active")));
 </script>
 </body>
 </html>
