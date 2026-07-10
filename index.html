@@ -6,7 +6,7 @@
 <title>WU88 OPEN</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tilt+Warp&family=Baloo+2:wght@500;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --orange:#FA812F;
@@ -19,7 +19,7 @@
   html,body{height:100%;}
   body{
     background:#ffffff;
-    font-family:'Poppins',sans-serif;
+    font-family:'Baloo 2',sans-serif;
     overflow:hidden;
     position:relative;
   }
@@ -46,53 +46,6 @@
     background:var(--line);
   }
 
-  /* glass panel */
-  .panel{
-    position:absolute;
-    left:40px;top:40px;bottom:40px;
-    width:508px;
-    border-radius:50px;
-    border:1px solid var(--line);
-    background:linear-gradient(90deg, rgba(255,255,255,0.98) 19%, rgba(255,255,255,0) 100%);
-    backdrop-filter:blur(10px);
-    overflow:hidden;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    padding:0 80px;
-  }
-
-  .corner-dots{
-    position:absolute;
-    display:grid;
-    grid-template-columns:repeat(6,5px);
-    grid-auto-rows:5px;
-    gap:10px;
-  }
-  .corner-dots span{width:5px;height:5px;border-radius:50%;background:var(--orange);}
-  .corner-dots.tl{top:0;left:40px;}
-  .corner-dots.br{right:80px;bottom:80px;}
-
-  .content-swap{position:relative;z-index:1;}
-  .panel h1{
-    font-family:'Baloo 2',sans-serif;
-    font-weight:700;
-    font-size:88px;
-    line-height:0.98;
-    letter-spacing:14px;
-    color:var(--ink);
-    transition:opacity .25s ease;
-  }
-  .panel p.tag{
-    margin-top:28px;
-    font-size:15px;
-    line-height:1.7;
-    color:var(--muted);
-    max-width:340px;
-    transition:opacity .25s ease;
-  }
-  .panel .fade{opacity:0;}
-
   /* dots-ball graphic */
   .dots-ball-wrap{
     position:absolute;
@@ -106,6 +59,47 @@
     width:798px;
     mix-blend-mode:multiply;
   }
+
+  /* two independent corner dot-grids (NOT part of the panel) */
+  .corner-dots{
+    position:absolute;
+    display:grid;
+    grid-template-columns:repeat(6,5px);
+    grid-auto-rows:5px;
+    gap:10px;
+    z-index:2;
+  }
+  .corner-dots span{width:5px;height:5px;border-radius:50%;background:var(--orange);}
+  .corner-dots.grid-a{left:80px;top:0;}       /* pokes above the panel's top edge */
+  .corner-dots.grid-b{right:80px;bottom:80px;} /* sits near the bottom of the side nav */
+
+  /* glass panel */
+  .panel{
+    position:absolute;
+    left:40px;top:40px;bottom:40px;
+    width:508px;
+    border-radius:50px;
+    border:1px solid var(--line);
+    background:linear-gradient(90deg, rgba(255,255,255,0.98) 19%, rgba(255,255,255,0) 100%);
+    backdrop-filter:blur(10px);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:0 80px;
+    z-index:1;
+  }
+
+  .content-swap{position:relative;z-index:1;}
+  .panel h1{
+    font-family:'Tilt Warp',sans-serif;
+    font-weight:400;
+    font-size:88px;
+    line-height:0.98;
+    letter-spacing:14px;
+    color:var(--ink);
+    transition:opacity .25s ease;
+  }
+  .panel .fade{opacity:0;}
 
   /* right nav */
   .side-nav{
@@ -134,26 +128,14 @@
     font-size:20px;
     font-weight:700;
   }
-  .side-nav button.active::after{
-    content:"";
+  .side-nav .nav-icon{
+    display:none;
     position:absolute;
-    right:-38px;top:50%;
+    right:-44.5px;top:50%;
     transform:translateY(-50%);
-    width:22px;height:22px;
-    border-radius:50%;
-    background:rgba(250,129,47,.2);
+    width:44.5px;height:44px;
   }
-  .side-nav button.active::before{
-    content:"";
-    position:absolute;
-    right:-32px;top:50%;
-    transform:translateY(-50%);
-    width:10px;height:10px;
-    border-radius:50%;
-    background:var(--orange);
-  }
-
-  .corner-dots.top-right{top:0;right:41px;}
+  .side-nav button.active .nav-icon{display:block;}
 
   @media (max-width:1100px){
     .side-nav{display:none;}
@@ -167,7 +149,17 @@
 <div class="stage">
   <div class="divider"></div>
 
-  <div class="corner-dots top-right">
+  <div class="dots-ball-wrap"><img src="assets/dots-ball.png" alt=""></div>
+
+  <div class="corner-dots grid-a">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="corner-dots grid-b">
     <span></span><span></span><span></span><span></span><span></span><span></span>
     <span></span><span></span><span></span><span></span><span></span><span></span>
     <span></span><span></span><span></span><span></span><span></span><span></span>
@@ -176,66 +168,31 @@
     <span></span><span></span><span></span><span></span><span></span><span></span>
   </div>
 
-  <div class="dots-ball-wrap"><img src="assets/dots-ball.png" alt=""></div>
-
   <div class="panel">
-    <div class="corner-dots tl">
-      <span></span><span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span><span></span>
-    </div>
     <div class="content-swap">
       <h1 id="panel-title">WU88<br/>OPEN</h1>
-      <p class="tag" id="panel-tag">A concept studio exploring bold ideas at the intersection of play, design and technology.</p>
-    </div>
-    <div class="corner-dots br">
-      <span></span><span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span><span></span>
     </div>
   </div>
 
   <nav class="side-nav" id="side-nav">
-    <button class="active" data-key="about">ABOUT</button>
-    <button data-key="what-we-do">WHAT WE DO</button>
-    <button data-key="reel">REEL</button>
-    <button data-key="latest-project">LATEST&nbsp;&nbsp;PROJECT</button>
-    <button data-key="contact-us">CONTACT US</button>
+    <button class="active" data-key="about">ABOUT<img class="nav-icon" src="assets/nav-icon.svg" alt=""></button>
+    <button data-key="what-we-do">WHAT WE DO<img class="nav-icon" src="assets/nav-icon.svg" alt=""></button>
+    <button data-key="reel">REEL<img class="nav-icon" src="assets/nav-icon.svg" alt=""></button>
+    <button data-key="latest-project">LATEST&nbsp;&nbsp;PROJECT<img class="nav-icon" src="assets/nav-icon.svg" alt=""></button>
+    <button data-key="contact-us">CONTACT US<img class="nav-icon" src="assets/nav-icon.svg" alt=""></button>
   </nav>
 </div>
 
 <script>
   const content = {
-    about: {
-      title: "WU88<br/>OPEN",
-      tag: "A concept studio exploring bold ideas at the intersection of play, design and technology."
-    },
-    "what-we-do": {
-      title: "WHAT<br/>WE DO",
-      tag: "We design and build playful digital products — from brand concepts to full platform experiences."
-    },
-    reel: {
-      title: "OUR<br/>REEL",
-      tag: "A curated highlight reel of our recent work, motion pieces and experiments."
-    },
-    "latest-project": {
-      title: "LATEST<br/>PROJECT",
-      tag: "Take a look at what we've been building most recently for our partners."
-    },
-    "contact-us": {
-      title: "SAY<br/>HELLO",
-      tag: "Have a project in mind? Reach out — hello@wu88open.com"
-    }
+    "about": "WU88<br/>OPEN",
+    "what-we-do": "WHAT<br/>WE DO",
+    "reel": "OUR<br/>REEL",
+    "latest-project": "LATEST<br/>PROJECT",
+    "contact-us": "SAY<br/>HELLO"
   };
 
   const titleEl = document.getElementById("panel-title");
-  const tagEl = document.getElementById("panel-tag");
   const buttons = document.querySelectorAll("#side-nav button");
 
   buttons.forEach(btn => {
@@ -243,14 +200,10 @@
       buttons.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
 
-      const data = content[btn.dataset.key];
       titleEl.classList.add("fade");
-      tagEl.classList.add("fade");
       setTimeout(() => {
-        titleEl.innerHTML = data.title;
-        tagEl.textContent = data.tag;
+        titleEl.innerHTML = content[btn.dataset.key];
         titleEl.classList.remove("fade");
-        tagEl.classList.remove("fade");
       }, 200);
     });
   });
