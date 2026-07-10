@@ -221,6 +221,15 @@
 
   positionIcon(document.querySelector("#side-nav button.active"));
   window.addEventListener("resize", () => positionIcon(document.querySelector("#side-nav button.active")));
+
+  // the button's box changes size once the web font finishes loading
+  // (swapping from the fallback font), so recompute after it's ready
+  // instead of waiting for the user to click something.
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => {
+      positionIcon(document.querySelector("#side-nav button.active"));
+    });
+  }
 </script>
 </body>
 </html>
